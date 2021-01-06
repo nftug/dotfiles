@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Disable Capslock
+Description=
+Exec=setxkbmap -option ctrl:nocaps
+Icon=keyboard

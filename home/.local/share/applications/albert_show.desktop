@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Show Albert
+Type=Application
+Terminal=false
+Exec=albert show
+Icon=deepin-launcher
+StartupNotify=false
+NoDisplay=true

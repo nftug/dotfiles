@@ -1,0 +1,12 @@
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+Target=*
+
+[Action]
+When=PostTransaction
+Description=Cleaning pacman caches...
+Depends=pacman-contrib
+Exec=/usr/bin/bash -c "/usr/bin/paccache -r; /usr/bin/paccache -ruk0"

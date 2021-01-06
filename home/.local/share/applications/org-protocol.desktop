@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=org-protocol
+Exec=/home/nftug/bin/emacs-capture.sh %u
+Type=Application
+Terminal=false
+MimeType=x-scheme-handler/org-protocol;
+Icon=Exec
+NoDisplay=true

@@ -1,0 +1,13 @@
+!! ~/.Xresources
+
+!! Xcursor.theme: Adwaita
+
+Emacs*useXIM: false
+
+Xft.dpi: 115
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hinting: 0
+Xft.antialias: 1
+Xft.rgba: rgba
+

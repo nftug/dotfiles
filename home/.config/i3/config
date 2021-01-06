@@ -1,0 +1,153 @@
+set $mod Mod4
+set $alt Mod1
+
+font pango:sans 9
+
+exec --no-startup-id ~/.config/i3/init.sh
+exec_always --no-startup-id ~/.config/i3/startup.sh
+
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-control --volume-max 100 --volume-step 5 up
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-control --volume-max 100 --volume-step 5 down
+bindsym XF86AudioMute exec --no-startup-id pulseaudio-control togmute
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/bin/brightness-ctl.sh up
+bindcode mode_switch+123 exec --no-startup-id ~/bin/brightness-ctl.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/bin/brightness-ctl.sh down
+bindcode mode_switch+122 exec --no-startup-id ~/bin/brightness-ctl.sh down
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindcode mode_switch+121 exec --no-startup-id playerctl play-pause
+
+floating_modifier $mod
+
+bindsym $mod+Shift+q kill
+bindsym $alt+F4 kill
+bindsym $alt+4 kill
+bindsym $mod+q exec --no-startup-id ~/bin/winclose.sh
+
+bindsym $mod+d exec --no-startup-id ~/bin/rofi_launch.sh
+bindsym $mod+l exec --no-startup-id ~/bin/rofi_locate.sh
+bindsym $mod+Shift+f exec --no-startup-id ~/bin/rofi_launch.sh -no-sidebar -modi: file-browser -show file-browser
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+t layout tabbed
+bindsym $mod+s layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+
+set $ws1 "1:ﱤ"
+set $ws2 "2:ﱤ"
+set $ws3 "3:ﱤ"
+set $ws4 "4:ﱤ"
+set $ws5 "5:ﱤ"
+set $ws6 "6:ﱤ"
+set $ws7 "7:ﱤ"
+set $ws8 "8:ﱤ"
+set $ws9 "9:ﱤ"
+set $ws10 "10:ﱤ"
+
+bindsym $alt+Control+Left exec --no-startup-id ~/.config/i3/empty-workspace.sh -p
+bindsym $alt+Control+Right exec --no-startup-id ~/.config/i3/empty-workspace.sh -n
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+$alt+Left exec --no-startup-id ~/.config/i3/empty-workspace.sh -P
+bindsym $mod+$alt+Right exec --no-startup-id ~/.config/i3/empty-workspace.sh -N
+bindsym $alt+Control+Shift+Left exec --no-startup-id ~/.config/i3/empty-workspace.sh -P
+bindsym $alt+Control+Shift+Right exec --no-startup-id ~/.config/i3/empty-workspace.sh -N
+
+bindsym $mod+Shift+1 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 1
+bindsym $mod+Shift+2 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 2
+bindsym $mod+Shift+3 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 3
+bindsym $mod+Shift+4 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 4
+bindsym $mod+Shift+5 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 5
+bindsym $mod+Shift+6 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 6
+bindsym $mod+Shift+7 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 7
+bindsym $mod+Shift+8 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 8
+bindsym $mod+Shift+9 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 9
+bindsym $mod+Shift+0 exec --no-startup-id ~/.config/i3/empty-workspace.sh -W 10
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym Right resize grow width 10 px or 1 ppt
+        bindsym Up resize shrink height 10 pxor 1 ppt
+        bindsym Down resize grow height 10 px or 1 ppt
+        bindsym Left resize shrink width 10 px or 1 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+b exec chromium
+bindsym $mod+e exec --no-startup-id ~/bin/ecl.sh -n
+bindsym $mod+Shift+e exec --no-startup-id emacsclient -nc -a "" -e '(switch-to-buffer "*scratch*")'
+bindsym $mod+Return exec --no-startup-id termite
+bindsym $mod+Shift+Return exec --no-startup-id termite -e 'tmux'
+bindsym $mod+a exec nautilus -w
+bindsym $mod+p exec /opt/enpass/Enpass showassistant
+#bindsym $mod+c exec --no-startup-id ~/bin/emacs-capture.sh -n
+bindsym $mod+c focus
+bindsym Control+semicolon exec --no-startup-id ~/bin/emacs-sdcv.sh -c
+
+bindsym Print exec --no-startup-id ~/bin/maim_wrapper.sh
+bindsym Control+Print exec --no-startup-id ~/bin/maim_wrapper.sh -s
+
+bindsym F1 exec --no-startup-id ~/.config/i3/termite-scratch.sh
+bindcode mode_switch+10 exec --no-startup-id ~/.config/i3/termite-scratch.sh
+bindsym F3 exec --no-startup-id ~/.config/i3/stalonetray-scratch.sh
+bindcode mode_switch+12 exec --no-startup-id ~/.config/i3/stalonetray-scratch.sh
+bindsym F4 exec --no-startup-id ~/bin/emacs-sdcv.sh
+bindcode mode_switch+13 exec --no-startup-id ~/bin/emacs-sdcv.sh
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus [title="[^(^stalonetray$)][^(^emacs-scratchpad$)][^(^termite-scratchpad$)]"] scratchpad show
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+x exec --no-startup-id ~/bin/rofi_sysmenu.sh show
+bindsym XF86PowerOff exec --no-startup-id ~/bin/rofi_sysmenu.sh show
+
+bindsym $mod+x [urgent=latest] focus
+
+for_window [class="i3lock-fancy"] floating enable
+for_window [title="^emacs-capture$" class="Emacs"] floating enable, move absolute position center
+for_window [title="^emacs-sdcv-popup$" class="Emacs"] floating enable
+for_window [title="^emacs-sdcv$" class="Emacs"] floating enable, sticky enable
+for_window [title="^emacs-scratchpad$"] floating enable, sticky enable, resize set 70ppt 70ppt, move scratchpad, move absolute position center
+for_window [title="^termite-scratchpad$"] floating enable, sticky enable, resize set 70ppt 70ppt, move scratchpad, move absolute position center
+for_window [class="stalonetray"] floating enable, move scratchpad
+for_window [class=Nitrogen|Yad|Gnome-calculator|Galculator|Gnome-screenshot|Lxappearance|Pavucontrol|Yad|Viewnior] floating enable, move absolute position center
+for_window [title=^Enpass$|^htop$|^GoldenDict$|^gcolor2$] floating enable, move absolute position center
+for_window [window_role=pop-up|dialog|task_dialog] floating enable, sticky enable
+for_window [title="^Question$" class="Emacs"] floating enable, sticky enable, move absolute position center
+
+for_window [class="^.*"] border pixel 0
+gaps inner 7
+gaps outer 2
+smart_gaps on
+
+popup_during_fullscreen smart
+focus_wrapping no
+focus_follows_mouse yes

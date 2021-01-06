@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[[ $1 =~ minimize ]] && sleep 15
+
+if [[ $HOSTNAME =~ gpd ]]; then
+    QT_SCALE_FACTOR=1.2
+    QT_SCREEN_SCALE_FACTORS=1.75
+fi
+
+/opt/enpass/Enpass "$@"

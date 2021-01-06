@@ -1,0 +1,370 @@
+[colors]
+background = #222d32
+background-alt = #3E434E
+foreground = #b9c3c7
+foreground-alt = #556066
+foreground-selected = #ffffff
+primary = #4db6ac
+secondary = #00bcd4
+alert = #ff5252
+
+[bar/main-mainpc]
+enable-ipc = true
+
+width = 100%
+height = 26
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 2
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = HackgenNerdConsole:size=11.5;4
+font-1 = HackgenNerdConsole:size=11.5;3
+font-2 = HackgenNerdConsole:size=13.5;3
+font-3 = HackgenNerdConsole:size=8;5
+
+modules-left = dmenu i3 i3-new-ws
+modules-center = 
+modules-right = pulseaudio-control cpu mem fcitx date toggle-tray
+
+tray-position = none
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+monitor = ${env:MONITOR:}
+
+[bar/main-gpd]
+enable-ipc = true
+
+width = 100%
+height = 38
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 4
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = HackgenNerdConsole:size=19;5
+font-1 = HackgenNerdConsole:size=19;4
+font-2 = HackgenNerdConsole:size=19;4
+font-3 = HackgenNerdConsole:size=13;6
+
+
+modules-left = dmenu i3 i3-new-ws
+modules-center = 
+modules-right =  pulseaudio-control cpu mem fcitx my-battery date screen-rotate toggle-tray
+
+tray-position = none
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+monitor = ${env:MONITOR:}
+
+[bar/main-lapbook]
+enable-ipc = true
+
+width = 100%
+height = 28
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 2
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = HackgenNerdConsole:size=13;4
+font-1 = HackgenNerdConsole:size=13;3
+font-2 = HackgenNerdConsole:size=14;4
+font-3 = HackgenNerdConsole:size=8;6
+
+modules-left = dmenu i3 i3-new-ws
+modules-center = 
+modules-right = pulseaudio-control cpu mem fcitx my-battery date toggle-tray
+
+tray-position = none
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+monitor = ${env:MONITOR:}
+
+;;;;;;;;;;;;;;;;;;;;;
+;;     Modules     ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:70:...%
+
+[module/dmenu]
+type = custom/text
+content = "%{T4} %{T-}"
+content-padding = 2
+content-font = 3
+click-left = ~/bin/rofi_launch.sh
+
+[module/i3-new-ws]
+type = custom/text
+content = " "
+content-padding = 0
+content-font = 2
+click-left = ~/.config/i3/empty-workspace.sh -T
+
+[module/i3-volume]
+type = custom/script
+tail = true
+exec = ~/bin/i3-vol-cmd.sh listen "%{T3}%i%{T1} %v\n"
+scroll-up = ~/bin/i3-vol-cmd.sh -npP -x 101 up 5
+scroll-down = ~/bin/i3-vol-cmd.sh -npP down 5
+click-left = ~/bin/i3-vol-cmd.sh -npP mute
+click-middle = pkill -x i3-vol-cmd.sh
+click-right = exec pavucontrol &
+format-padding = 1
+;format-background = ${colors.background-alt}
+
+[module/fcitx]
+type = custom/script
+exec = ~/.config/polybar/scripts/polybar-fcitx.sh watch
+tail = true
+format-padding = 1
+;format-font = 1
+;format-underline = ${colors.primary}
+click-left = ~/.config/polybar/scripts/polybar-fcitx.sh toggle
+;format-background = ${colors.background-alt}
+
+[module/dropbox_status]
+type = custom/script
+exec = ~/.config/polybar/scripts/dropbox_status.sh
+interval = 3
+format-prefix = ""
+;format-prefix-font = 3
+format-padding = 0
+;format-underline = ${colors.primary}
+click-left = exec xdg-open ~/Dropbox
+click-right = ~/.config/polybar/scripts/dropbox_status.sh toggle
+;format-background = ${colors.background-alt}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+format-font = 2
+index-sort = true
+wrapping-scroll = true
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 1
+label-mode-foreground = ${colors.foreground-selected}
+label-mode-background = ${colors.secondary}
+label-mode-margin-right = 1
+
+; focused = Active workspace on focused monitor
+label-focused = %name%
+label-focused-underline= ${colors.secondary}
+;label-focused-background = ${colors.background-alt}
+;label-focused-background = ${colors.secondary}
+label-focused-foreground = ${colors.foreground-selected}
+label-focused-padding = 1
+label-focused-margin-right = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+label-unfocused-padding = 1
+label-unfocused-margin-right = 1
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+label-urgent-foreground = ${colors.alert}
+label-urgent-padding = 1
+label-urgent-margin-right = 1
+
+; Separator in between workspaces
+;label-separator = |
+;label-separator-foreground = ${colors.foreground-alt}
+
+[module/cpu]
+type = custom/script
+tail = true
+exec =  ~/.config/polybar/scripts/cpu_mem.sh cpu
+format-padding = 1
+;format-underline = ${colors.primary}
+click-left = ~/.config/polybar/scripts/cpu_mem.sh show mem
+click-right=~/bin/turbo-switch.sh
+;format-background = ${colors.background-alt}
+
+[module/mem]
+type = custom/script
+hidden = true
+tail = true
+exec =  ~/.config/polybar/scripts/cpu_mem.sh mem
+format-padding = 1
+;format-underline = ${colors.primary}
+click-left = ~/.config/polybar/scripts/cpu_mem.sh show cpu
+click-right=~/bin/turbo-switch.sh
+;format-background = ${colors.background-alt}
+
+[module/my-battery]
+type = custom/script
+interval = 5
+exec = ~/.config/polybar/scripts/bat.sh
+format-padding = 1
+click-left=~/.config/polybar/scripts/bat_tooltip.sh
+;format-background = ${colors.background-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+date = "%b %d"
+date-alt = "%a"
+time = %H:%M
+time-alt = "%l:%M %p"
+label = "%date% %time%"
+format-padding = 1
+format-prefix = " "
+;format-background = ${colors.background-alt}
+
+[module/sysmenu]
+type = custom/text
+content = "襤 "
+content-padding = 0
+;content-foreground = ${colors.foreground-alt}
+content-font = 3
+click-left = ~/bin/rofi_sysmenu.sh show
+
+[module/toggle-tray]
+type = custom/text
+content = ""
+content-suffix = " "
+;content-foreground = ${colors.foreground-alt}
+click-left = ~/.config/i3/stalonetray-scratch.sh
+content-padding = 1
+
+[module/screen-rotate]
+type = custom/text
+content = "不"
+content-padding = 1
+content-font = 3
+click-left = ~/bin/gpd-toggle-screen.sh
+
+[module/redshift]
+type = custom/script
+format-prefix = " "
+format-prefix-foreground-alt = ${colors.foreground-alt}
+click-left = ~/.config/polybar/scripts/redshift-toggle.sh toggle
+exec = ~/.config/polybar/scripts/redshift-toggle.sh label
+interval = 0.5
+
+[module/previous]
+type = custom/ipc
+format-font = 2
+; Default
+hook-0 = echo ""
+; When spotify active
+hook-1 = echo " "
+click-left = "spotifyctl -q previous"
+
+[module/next]
+type = custom/ipc
+format-font = 2
+; Default
+hook-0 = echo ""
+; When spotify active
+hook-1 = echo ""
+click-left = "spotifyctl -q next"
+
+[module/playpause]
+type = custom/ipc
+format-font = 2
+; Default
+hook-0 = echo ""
+; Playing
+hook-1 = echo ""
+; Paused
+hook-2 = echo ""
+
+click-left = "spotifyctl -q playpause"
+
+[module/spotify]
+type = custom/ipc
+; Default
+hook-0 = echo ""
+; Playing/paused show song name and artist
+hook-1 = spotifyctl -q status --format '   %artist%: %title%'
+;format-underline = #1db954
+click-right = "~/.config/polybar/scripts/spotify_focus.sh"
+click-left = "spotifyctl -q playpause"
+
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+label-padding = 1
+label-foreground = ${colors.foreground}
+
+exec = ~/.config/polybar/scripts/pulseaudio-listen.sh
+click-right = exec pavucontrol &
+click-left = pulseaudio-control togmute
+click-middle = pulseaudio-control next-sink
+scroll-up = pulseaudio-control --volume-max 100 up
+scroll-down = pulseaudio-control --volume-max 100 down
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini

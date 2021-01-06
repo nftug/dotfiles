@@ -1,0 +1,35 @@
+# background "#32343D"
+background "#222d32"
+geometry 6x1-10+56
+icon_size 32
+kludges force_icons_size
+slot_size  78
+
+scrollbars horizontal
+scrollbars_highlight "#4d5a60"
+scrollbars_size 16
+scrollbars_step 78
+
+grow_gravity NW
+icon_gravity NW
+skip_taskbar true
+sticky true
+vertical false
+window_layer top
+
+# window_type: desktop, dock, normal, toolbar, utility
+window_type toolbar
+
+decorations none
+dockapp_mode none
+fuzzy_edges 0
+log_level err
+max_geometry 1x1
+no_shrink false
+parent_bg false
+tint_color grey
+tint_level 0
+transparent false
+window_strut auto
+xsync false
+
