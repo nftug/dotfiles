@@ -981,7 +981,7 @@
     :init
     (idle-require 'flycheck 3)
     :custom
-    (flycheck-check-syntax-automatically . '(save mode-enabled idle-change))
+    (flycheck-check-syntax-automatically . '(save mode-enabled))
     (flycheck-idle-change-delay . 1)
     (flycheck-emacs-lisp-load-path . 'inherit)
     :defer-config
