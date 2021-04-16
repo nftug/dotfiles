@@ -53,7 +53,7 @@ else
     
     if [[ -n `ip link show | grep wlp[0-9]s` ]]; then
 	nm-applet &
-	light-locker &	
+	light-locker --no-lock-on-lid &	
     fi
 
     xdg_autostart &
