@@ -174,6 +174,20 @@
     :config
     (defun my/fonts-init ()
       (when window-system
+	(unless (fontset-name-p "fontset-variable")
+	  (let* ((asciifont "Source Han Sans JP-11.5:weight=light:slant=normal")
+		 (jpfont "Source Han Sans JP")
+		 (fontset)
+		 (fontspec)
+		 (jp-fontspec))
+	    (setq fontset (create-fontset-from-ascii-font asciifont nil "variable"))
+	    (setq fontspec (font-spec :family asciifont))
+	    (setq jp-fontspec (font-spec :family jpfont))
+	    (set-fontset-font fontset 'unicode jp-fontspec nil 'append)
+	    (set-fontset-font fontset 'ascii fontspec nil 'append) ;;対処済み
+	    ;;(set-face-attribute 'my/serif nil :font fontset) ;;英語のみ
+	    (set-face-attribute 'variable-pitch nil :fontset fontset)))
+	
 	(unless (fontset-name-p "fontset-myserif")
 	  (let* ((asciifont "Source Serif Pro-11.5:weight=normal:slant=normal")
 		 (jpfont "Source Han Serif JP")
@@ -1404,32 +1418,32 @@
 	(face-remap-set-base 'org-code :inherit 'org-code)
 	(face-remap-set-base 'org-checkbox :inherit 'org-checkbox :inherit 'fixed-pitch))
 
-      (if (string-match (format "%s.*/Documents/.*" (getenv "HOME")) (format "%s" buffer-file-name))
-	  (progn
-	    (setq olivetti-body-width 90)
-	    (when window-system
-	      (my/serif-mode 1)
-	      (setq line-spacing 2)
-	      (face-remap-set-base 'bold :inherit 'variable-pitch :weight 'semibold)
-	      (face-remap-add-relative 'org-document-title :height 160)
-	      (face-remap-add-relative 'org-level-1 :height 150)
-	      (face-remap-add-relative 'org-level-2 :height 140)
-	      (face-remap-add-relative 'org-level-3 :height 130)))
+      ;; (if (string-match (format "%s.*/Documents/.*" (getenv "HOME")) (format "%s" buffer-file-name))
+      ;; 	  (progn
+      ;; 	    (setq olivetti-body-width 90)
+      ;; 	    (when window-system
+      ;; 	      (my/serif-mode 1)
+      ;; 	      (setq line-spacing 2)
+      ;; 	      (face-remap-set-base 'bold :inherit 'variable-pitch :weight 'semibold)
+      ;; 	      (face-remap-add-relative 'org-document-title :height 160)
+      ;; 	      (face-remap-add-relative 'org-level-1 :height 150)
+      ;; 	      (face-remap-add-relative 'org-level-2 :height 140)
+      ;; 	      (face-remap-add-relative 'org-level-3 :height 130)))
 
-	(when window-system
-	  (variable-pitch-mode 1)
-	  (setq line-spacing 1)
-	  (face-remap-add-relative 'org-document-title :height 140)
-	  (dotimes (i 8)
-	    (face-remap-add-relative (intern (format "org-level-%s" (1+ i)))
-				     :weight 'semibold)))))
-    
+      (when window-system
+	(variable-pitch-mode 1)
+	(setq line-spacing 1)
+	(face-remap-add-relative 'org-document-title :height 140)
+	(dotimes (i 8)
+	  (face-remap-add-relative (intern (format "org-level-%s" (1+ i)))
+				   :weight 'semibold)))
+      
     (setq org-modules (delete 'ol-gnus org-modules)
 	  org-modules (delete 'ol-w3m org-modules)
 	  org-modules (delete 'ol-irc org-modules))
 
     (setq org-file-apps (append '(("^calibre:" . "xdg-open %s"))
-				org-file-apps)))
+				org-file-apps))))
 
   (leaf org-tempo
     :after org
