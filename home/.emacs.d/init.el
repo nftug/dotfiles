@@ -1584,6 +1584,20 @@
 					(when (and (boundp 'org-capture-mode) org-capture-mode)
 					  (org-capture-kill)))))
 
+  (leaf ox-latex
+    :after org
+    :bind (:org-mode-map
+	   ( "C-c C-e" . org-export-dispatch))
+    :custom
+    (org-latex-pdf-process . '("latexmk %f"))
+    ;;  (org-export-in-background t)
+    ;;  (org-export-async-init-file "~/.emacs.d/org-export-async-init.el")
+    (org-latex-with-hyperref . nil)
+    (org-latex-logfiles-extensions . '("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl" "xml" "synctex.gz" "bcf" "run.xml"))
+    :defer-config
+    (unless org-export-in-background
+      (load (! (expand-file-name "my-org-latex-classes" user-emacs-directory)))))
+  
   (leaf org-noter
     :after org
     :straight t
