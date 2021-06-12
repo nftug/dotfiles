@@ -17,7 +17,7 @@ elif [[ ${wintitle} =~ tmux$ ]]; then
     
 else
     case $progname in
-	"chromium"|"nautilus"|"gedit"|"thunar" )
+	"chromium"|"firefox"|"nautilus"|"gedit"|"thunar" )
 	    xdotool key ctrl+w ;;
 	gimp-* )
             winname=`xdotool getwindowname $activewin`
