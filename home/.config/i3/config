@@ -100,7 +100,7 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+b exec xdg-open http://
+bindsym $mod+b exec chromium
 bindsym $mod+e exec --no-startup-id ~/bin/ecl.sh -n
 bindsym $mod+Shift+e exec --no-startup-id emacsclient -nc -a "" -e '(switch-to-buffer "*scratch*")'
 bindsym $mod+Return exec --no-startup-id termite

@@ -9,7 +9,6 @@ declare -A icon=(
     ['Leafpad']='' ['Viewnior']='' ['Xarchiver']='' ['mpv']='蘆'
     ['Evince']='' ['zoom']='' ['Easytag']='炙' ['Steam']='戮'
     ['Enpass']='' ['Pamac-manager']='' ['Mpdevil']=''
-    ['firefox']=''
     
     ['_EMPTY_']='ﱤ'
     ['_OTHER_']='ﬓ'
