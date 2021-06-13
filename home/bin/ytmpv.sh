@@ -141,6 +141,7 @@ if ! type aria2c >/dev/null 2>&1; then
 fi
 
 playerctl -p chromium pause
+playerctl -p firefox pause
 
 #browser_window_id=$(xdotool search --name --onlyvisible "Chromium")
 #xdotool windowactivate $browser_window_id
