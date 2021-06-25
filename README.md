@@ -1,4 +1,4 @@
-# nftug's dotfiles
+# V-nyang's dotfiles
 
 Linuxの環境構築用のdotfilesです。
 (for Arch Linux)
