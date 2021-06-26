@@ -139,7 +139,7 @@ for_window [title="^emacs-scratchpad$"] floating enable, sticky enable, resize s
 for_window [title="^termite-scratchpad$"] floating enable, sticky enable, resize set 70ppt 70ppt, move scratchpad, move absolute position center
 for_window [class="stalonetray"] floating enable, move scratchpad
 for_window [class=Nitrogen|Yad|Gnome-calculator|Galculator|Gnome-screenshot|Lxappearance|Pavucontrol|Yad|Viewnior] floating enable, move absolute position center
-for_window [title=^Enpass$|^htop$|^GoldenDict$|^gcolor3$] floating enable, move absolute position center
+for_window [title=^Enpass$|^htop$|^GoldenDict$|^Gcolor3$] floating enable, move absolute position center
 for_window [window_role=pop-up|dialog|task_dialog] floating enable, sticky enable
 for_window [title="^Question$" class="Emacs"] floating enable, sticky enable, move absolute position center
 
