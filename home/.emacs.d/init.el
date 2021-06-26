@@ -52,11 +52,11 @@
       :require t)
     (leaf s
       :straight t
-      :require t)
-    (leaf dash
-      :straight t
       :require t)))
 
+(leaf dash
+  :straight t
+  :require t)
 
 
 (leaf *init
@@ -974,21 +974,29 @@
     :config
     (company-posframe-mode)
     :defun company-posframe-mode)
-  
-  (leaf jedi-core
+
+  (leaf company-box
     :straight t
     :hook
-    (python-mode-hook . jedi:setup)
-    :custom
-    (jedi:complete-on-dot . t)
-    (jedi:use-shortcuts . t))
-
-  (leaf company-jedi
+    (company-mode-hook . company-box-mode))
+  
+  (leaf lsp-mode
     :straight t
-    :defvar company-backends
-    :after jedi-core company-posframe
-    :config
-    (add-to-list 'company-backends 'company-jedi))
+    :custom
+    (lsp-completion-provider . :capf)
+    (lsp-prefer-flymake . nil))
+
+  (leaf lsp-ui
+    :straight t
+    :hook
+    (lsp-mode-hook . lsp-ui-mode))
+
+  (leaf lsp-pyright
+    :straight t
+    :after python
+    :require t
+    :hook
+    (python-mode-hook . lsp))
   
   (leaf flycheck
     :straight t
@@ -1588,6 +1596,7 @@
     :after org
     :bind (:org-mode-map
 	   ( "C-c C-e" . org-export-dispatch))
+    :defvar org-export-in-background
     :custom
     (org-latex-pdf-process . '("latexmk %f"))
     ;;  (org-export-in-background t)
@@ -1761,7 +1770,6 @@
     (eww-search-prefix . "https://www.google.co.jp/search?q=")))
 
 
-
 
 (leaf *my/scripts
   :config
