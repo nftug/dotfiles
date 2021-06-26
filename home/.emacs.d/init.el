@@ -52,11 +52,11 @@
       :require t)
     (leaf s
       :straight t
+      :require t)
+    (leaf dash
+      :straight t
       :require t)))
 
-(leaf dash
-  :straight t
-  :require t)
 
 
 (leaf *init
@@ -104,7 +104,7 @@
     (delete-selection-mode)
     (with-current-buffer "*Messages*"
       (emacs-lock-mode 'kill)))
-
+  
   (leaf server
     :preface
     (defun server-running-p nil)
@@ -983,6 +983,7 @@
   
   (leaf lsp-mode
     :straight t
+    :require dash
     :custom
     (lsp-completion-provider . :capf)
     (lsp-prefer-flymake . nil))
