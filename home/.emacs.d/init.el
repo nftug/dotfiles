@@ -456,6 +456,7 @@
     :straight t
     :hook
     (prog-mode-hook . highlight-indent-guides-mode)
+    (prog-mode-hook . highlight-indent-guides-auto-set-faces)
     :custom
     (highlight-indent-guides-method . 'bitmap)
     (highlight-indent-guides-bitmap-function .'highlight-indent-guides--bitmap-line)
