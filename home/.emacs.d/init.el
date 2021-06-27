@@ -1149,7 +1149,7 @@
 		  (if (with-current-buffer buf
 			(let ((name (buffer-name)))
 			  (or
-			   (string-equal "vterm" name)
+			   (string-equal "*vterm*" name)
 			   (string-prefix-p "*Async" name)
 			   (string-prefix-p "*Messages" name)
 			   (string-prefix-p "*sdcv" name)
