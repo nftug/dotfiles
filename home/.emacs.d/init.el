@@ -1009,7 +1009,24 @@
     (flycheck-idle-change-delay . 1)
     (flycheck-emacs-lisp-load-path . 'inherit)
     :defer-config
-    (global-flycheck-mode)))
+    (global-flycheck-mode))
+
+  (leaf web-mode
+    :straight t
+    :mode
+    ("\\.html\\'" . web-mode)
+    (("\\.js\\'" "\\.css\\'") . web-mode)
+    :custom
+    (web-mode-markup-indent-offset . 2)
+    (web-mode-css-indent-offset . 2)
+    (web-mode-code-indent-offset . 2)
+    (web-mode-enable-current-element-highlight . t)
+    (web-mode-enable-auto-pairing . t)
+    (web-mode-enable-auto-closing . t)
+    (web-mode-engines-alist
+     . '(("django" . "\\.html\\'")))
+    )
+  )
 
 
 
@@ -1448,12 +1465,12 @@
 	  (face-remap-add-relative (intern (format "org-level-%s" (1+ i)))
 				   :weight 'semibold)))
       
-    (setq org-modules (delete 'ol-gnus org-modules)
-	  org-modules (delete 'ol-w3m org-modules)
-	  org-modules (delete 'ol-irc org-modules))
+      (setq org-modules (delete 'ol-gnus org-modules)
+	    org-modules (delete 'ol-w3m org-modules)
+	    org-modules (delete 'ol-irc org-modules))
 
-    (setq org-file-apps (append '(("^calibre:" . "xdg-open %s"))
-				org-file-apps))))
+      (setq org-file-apps (append '(("^calibre:" . "xdg-open %s"))
+				  org-file-apps))))
 
   (leaf org-tempo
     :after org
