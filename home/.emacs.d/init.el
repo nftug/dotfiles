@@ -1021,11 +1021,10 @@
     (web-mode-css-indent-offset . 2)
     (web-mode-code-indent-offset . 2)
     (web-mode-enable-current-element-highlight . t)
-    (web-mode-enable-auto-pairing . t)
+    (web-mode-enable-auto-pairing . nil)
     (web-mode-enable-auto-closing . t)
     (web-mode-engines-alist
-     . '(("django" . "\\.html\\'")))
-    )
+     . '(("django" . "\\.html\\'"))))
   )
 
 
