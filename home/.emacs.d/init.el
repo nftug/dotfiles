@@ -1057,6 +1057,11 @@
     (dashboard-text-banner . '((nil (:inherit default))))
     :blackout t
     :preface
+    (defun dashboard-kill-org-buffers ()
+      ;; org-agendaのファイルでvariable-pitchの表示をするため、一旦対象のバッファーをkillする
+      (dolist (file org-agenda-files)
+	(when (get-file-buffer file)
+	  (kill-buffer (get-file-buffer file)))))
     (defun my/dashboard-after-initialize-hook ()
       (setq dashboard-init-info
 	    (let ((package-count 0)
@@ -1067,10 +1072,7 @@
 		  (format "Emacs started in %s seconds" time)
 		(format "%d packages loaded in %s seconds" package-count time))))
       (dashboard-refresh-buffer)
-      ;; org-agendaのファイルでvariable-pitchの表示をするため、一旦対象のバッファーをkillする
-      (dolist (file org-agenda-files)
-	(when (get-file-buffer file)
-	  (kill-buffer (get-file-buffer file))))
+      (dashboard-kill-org-buffers)
       (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
 
     :init
@@ -1721,13 +1723,13 @@
     (:pdf-view-mode-map
      ("TAB" . pdf-outline)
      ("<right>" . #'(lambda () (interactive)
-		    (if (eq pdf-view-display-size 'fit-page)
-			(pdf-view-next-page-command)
-		      (image-forward-hscroll 2))))
+		      (if (eq pdf-view-display-size 'fit-page)
+			  (pdf-view-next-page-command)
+			(image-forward-hscroll 2))))
      ("<left>" . #'(lambda () (interactive)
-		   (if (eq pdf-view-display-size 'fit-page)
-		       (pdf-view-previous-page-command)
-		     (image-backward-hscroll 2)))))
+		     (if (eq pdf-view-display-size 'fit-page)
+			 (pdf-view-previous-page-command)
+		       (image-backward-hscroll 2)))))
     :custom
     (pdf-view-display-size . 'fit-page)
     (pdf-view-resize-factor . 1.1)
