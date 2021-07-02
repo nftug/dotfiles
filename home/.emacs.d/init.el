@@ -35,8 +35,7 @@
 	   'silent 'inhibit-cookies)
 	(goto-char (point-max))
 	(eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
-  (require 'straight-x))
+    (load bootstrap-file nil 'nomessage)))
 
 (!!
   (straight-use-package 'leaf)
