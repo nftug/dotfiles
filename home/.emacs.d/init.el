@@ -160,6 +160,7 @@
     (use-default-font-for-symbols . nil)
     :hook
     ((after-init-hook server-after-make-frame-hook) . my/fonts-init)
+    :defun buffer-face-mode-invoke
     :preface
     (defface my/serif '((t :family "Source Serif Pro"))
       "My Serif face"
@@ -279,6 +280,7 @@
   
   (leaf recentf
     :straight t
+    :defun recentf-save-list
     :custom
     (recentf-max-saved-items . 1000)
     (recentf-exclude . `(".recentf" ".orhc-bibtex-cache" ".pdf-view-restore" "\\.ics" ,tramp-file-name-regexp))
@@ -286,8 +288,8 @@
     `(recentf-save-file . ,(expand-file-name ".recentf" user-emacs-directory))
     :config
     (run-with-idle-timer 30 t
-			 '(lambda ()
-			    (with-suppressed-message (recentf-save-list)))))
+			 #'(lambda ()
+			     (with-suppressed-message (recentf-save-list)))))
 
   (leaf recentf-ext
     :straight t
@@ -362,7 +364,8 @@
     		    (if window-system
     			(setq mozc-candidate-style 'posframe)
     		      (setq mozc-candidate-style 'echo-area))))
-    :defun mozc-posframe-register)
+    :defun mozc-posframe-register
+    :defvar mozc-candidate-style)
 
   (leaf magit
     :straight t
@@ -373,6 +376,7 @@
   (leaf all-the-icons
     :if (or (window-system) (and (getenv "DISPLAY") (daemonp)))
     :straight t
+    :defun all-the-icons-install-fonts
     :custom
     (all-the-icons-scale-factor . 1.0)
     :preface
@@ -387,11 +391,9 @@
 
   (leaf posframe
     :straight t
-    :after t
+    :defun posframe-delete-all
     :advice
-    (:after load-theme (lambda (&rest _) (posframe-delete-all)))
-    :custom
-    (posframe-mouse-banish . t)))
+    (:after load-theme (lambda (&rest _) (posframe-delete-all)))))
 
 
 
@@ -414,7 +416,9 @@
 	(let ((global-hl-line-mode t))
 	  (global-hl-line-highlight))))
     (setq global-hl-line-timer
-	  (run-with-idle-timer 0.03 t 'global-hl-line-timer-function)))
+	  (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
+    :defvar global-hl-line-timer
+    :defun global-hl-line-unhighlight-all global-hl-line-highlight)
 
   (leaf elec-pair
     :hook
@@ -443,7 +447,7 @@
     (if (daemonp)
 	(add-hook 'server-after-make-frame-hook 'my/paren--setcolor-init)
       (add-hook 'emacs-startup-hook 'my/paren-setcolor))
-    :defun my/paren--server-init my/paren-setcolor)
+    :defun my/paren--server-init my/paren-setcolor doom-color)
 
   (leaf rainbow-delimiters
     :straight t
@@ -714,7 +718,7 @@
 		  (setq leaf-tree--imenu-list-minor-mode-value (if imenu-list-minor-mode 1 -1))
 		  (pcase-dolist (`(,sym . ,fn) leaf-tree-advice-alist)
 		    (advice-add sym :around fn))))
-    :defvar leaf-tree-advice-alist leaf-tree--imenu-list-minor-mode-value))
+    :defvar leaf-tree-advice-alist leaf-tree--imenu-list-minor-mode-value imenu-list-minor-mode))
 
 
 
@@ -725,7 +729,7 @@
     :blackout t
     :commands ivy-mode
     :defun
-    ivy-set-display-transformer ivy--format-function-generic ivy--add-face
+    ivy-set-display-transformer ivy--format-function-generic ivy--add-face ivy-read
     :defvar ivy-format-functions-alist
     :bind
     ("C-c C-r" . ivy-resume)
@@ -853,6 +857,7 @@
 	 (counsel-sdcv-prompt . ivy-display-function-fallback)
 	 (complete-symbol . ivy-posframe-display-at-point)
 	 (flyspell-correct-ivy . ivy-posframe-display-at-point)
+	 (counsel-find-file . ivy-display-function-fallback)
 	 (t               . ivy-posframe-display-at-frame-center)))
     (ivy-posframe-parameters
      . '((left-fringe . 10)
@@ -877,7 +882,8 @@
     :config
     (ivy-prescient-mode)
     (setf (alist-get t ivy-re-builders-alist) #'ivy--regex-ignore-order)
-    :defun ivy-prescient-re-builder ivy--regex-ignore-order)
+    :defun ivy-prescient-re-builder ivy--regex-ignore-order
+    :defvar ivy-re-builders-alist)
 
   (leaf migemo
     :if (executable-find "cmigemo")
@@ -1008,7 +1014,8 @@
     (flycheck-idle-change-delay . 1)
     (flycheck-emacs-lisp-load-path . 'inherit)
     :defer-config
-    (global-flycheck-mode))
+    (global-flycheck-mode)
+    :defun global-flycheck-mode)
 
   (leaf web-mode
     :straight t
@@ -1050,11 +1057,6 @@
     (dashboard-text-banner . '((nil (:inherit default))))
     :blackout t
     :preface
-    (defun kill-org-agenda-buffers ()
-      (dolist (file org-agenda-files)
-	(when (get-file-buffer file)
-	  (kill-buffer (get-file-buffer file)))))
-
     (defun my/dashboard-after-initialize-hook ()
       (setq dashboard-init-info
 	    (let ((package-count 0)
@@ -1066,7 +1068,9 @@
 		(format "%d packages loaded in %s seconds" package-count time))))
       (dashboard-refresh-buffer)
       ;; org-agendaのファイルでvariable-pitchの表示をするため、一旦対象のバッファーをkillする
-      (kill-org-agenda-buffers)
+      (dolist (file org-agenda-files)
+	(when (get-file-buffer file)
+	  (kill-buffer (get-file-buffer file))))
       (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
 
     :init
@@ -1313,7 +1317,6 @@
       (face-remap-set-base 'font-lock-function-name-face
 			   :inherit 'font-lock-function-name-face :inherit 'variable-pitch
 			   :height (round (! (* 110  sdcv-font-magnification))) :weight 'semibold))
-
     
     (advice-add 'sdcv-filter :override
 		(lambda (sdcv-string)
@@ -1344,8 +1347,8 @@
 		  (if (string-match "^emacs-sdcv\\(-popup\\)*$" (frame-parameter nil 'name))
 		      (delete-frame nil t))))
     
-    :defvar sdcv-filter-string-list sdcv-mode-font-lock-keywords
-    :defun sdcv-region-or-word sdcv-search-detail sdcv-goto-sdcv sdcv-get-buffer counsel-sdcv-prompt)
+    :defvar sdcv-filter-string-list sdcv-mode-font-lock-keywords sdcv-fail-notify-string
+    :defun sdcv-region-or-word sdcv-search-detail sdcv-goto-sdcv sdcv-get-buffer counsel-sdcv-prompt sdcv-make-history)
 
   (leaf flyspell
     :straight t
@@ -1534,6 +1537,7 @@
     :after org
     :require t
     :defvar org-directory org-capture-templates
+    :defun all-the-icons-faicon my/all-the-icons-init
     :defer-config
     (my/all-the-icons-init)
     (setq org-capture-templates
@@ -1716,11 +1720,11 @@
     :bind
     (:pdf-view-mode-map
      ("TAB" . pdf-outline)
-     ("<right>" . (lambda () (interactive)
+     ("<right>" . #'(lambda () (interactive)
 		    (if (eq pdf-view-display-size 'fit-page)
 			(pdf-view-next-page-command)
 		      (image-forward-hscroll 2))))
-     ("<left>" . (lambda () (interactive)
+     ("<left>" . #'(lambda () (interactive)
 		   (if (eq pdf-view-display-size 'fit-page)
 		       (pdf-view-previous-page-command)
 		     (image-backward-hscroll 2)))))
@@ -1738,13 +1742,15 @@
       (pdf-isearch-minor-mode))
 
     (pdf-tools-install :no-query)
-    (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+    (define-key pdf-view-mode-map (kbd "C-s") #'isearch-forward)
 
-    :defvar migemo-isearch-enable-p)
+    :defvar migemo-isearch-enable-p
+    :defun pdf-tools-install pdf-links-minor-mode pdf-sync-minor-mode pdf-isearch-minor-mode)
 
   (leaf pdf-view-restore
     :straight t
     :after pdf-view
+    :defun pdf-view-restore-mode
     :hook
     (pdf-view-mode-hook . (lambda()
 			    (pdf-view-restore-mode)
@@ -1767,10 +1773,6 @@
       (face-remap-add-relative 'my/serif :height 120)
       (setq line-spacing 4)
       (let* ((nov-lang-en nil))
-	(dolist (item nov-metadata)
-	  (-let [(key . value) item]
-	    (when (and (eq key 'language) (equal (format "%s" value) "en"))
-	      (setq nov-lang-en t))))
 	(cond (nov-lang-en
 	       (setq word-wrap t)
 	       (setq-local nov-text-width 76)
@@ -1778,7 +1780,7 @@
 	      (t
 	       (setq-local nov-text-width 81)
 	       (setq olivetti-body-width 94))))))
-
+  
   (leaf eww
     :bind
     ("C-x w" . eww-search-words)
@@ -1812,6 +1814,8 @@
     :defvar centaur-tabs-mode
     :bind
     ("<M-f11>" . my-toggle-concentrate-screen)
+    :defvar global-hide-mode-line-mode
+    :defun global-hide-mode-line-mode
     :preface
     (defun my-toggle-concentrate-screen ()
       (interactive)
