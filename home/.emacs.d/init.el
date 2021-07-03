@@ -968,7 +968,7 @@
     :hook
     (prog-mode-hook . company-mode)
     :custom
-    (company-idle-delay . 0.5)
+    (company-idle-delay . 0.2)
     (company-minimum-prefix-length . 3)
     (company-selection-wrap-around . t))
 
