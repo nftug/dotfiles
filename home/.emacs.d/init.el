@@ -636,7 +636,6 @@
       "Text scale for neotree."
       (interactive)
       (with-suppressed-message
-	(variable-pitch-mode)
 	(text-scale-adjust 0)
 	(text-scale-decrease 3.0))))
 
@@ -689,12 +688,7 @@
     (imenu-list-focus-after-activation . t)
     (imenu-list-size . 0.2)
     (imenu-list-position . 'right)
-    (imenu-list-auto-resize . nil)
-    :hook
-    (imenu-list-major-mode-hook . (lambda ()
-				    (variable-pitch-mode)
-				    (text-scale-adjust 0)
-				    (text-scale-decrease 3.0))))
+    (imenu-list-auto-resize . nil))
 
   (leaf leaf-tree
     :straight t
