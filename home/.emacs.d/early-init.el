@@ -61,7 +61,12 @@
 
 (setq frame-title-format '((:eval (if (buffer-file-name) "%f" "%b")) " - Emacs"))
 
-
+(setq byte-compile-warnings
+      '(not free-vars unresolved callargs redefine obsolete noruntime
+            cl-functions interactive-only make-local))
+;; (setq byte-compile-warnings '(not obsolete))
+(setq ad-redefinition-action 'accept)
+(custom-set-variables '(warning-suppress-types '((comp))))
 
 
 ;; (require 'profiler)
