@@ -41,7 +41,7 @@
 
 (defconst default-font
   (!if (string= (system-name) "mainpc")
-      "HackgenNerd Console-12"
+      "HackgenNerd Console-11"
     (!if (string= (system-name) "lapbook")
 	"HackgenNerd Console-9"
       (!if (string= (system-name) "gpd")
