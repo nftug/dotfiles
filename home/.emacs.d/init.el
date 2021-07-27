@@ -1102,6 +1102,7 @@
       (display-time-mode))
 
     (leaf battery
+      :if (not (string= (system-name) "mainpc"))
       :preface
       (! (require 'battery))
       :config
