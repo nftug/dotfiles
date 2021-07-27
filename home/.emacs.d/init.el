@@ -1231,7 +1231,7 @@
 		1.1)))))
 
     (defvar sdcv-history)
-    (defmacro sdcv-make-history ()
+    (defun sdcv-make-history ()
       '(setq sdcv-history
 	     (with-temp-buffer
 	       (insert-file-contents "~/.sdcv_history")
