@@ -87,6 +87,7 @@
 				(,tramp-file-name-regexp . nil)))
     (text-scale-mode-step . 1.05)
     (inhibit-compacting-font-caches . t)
+    (pgtk-use-im-context-on-new-connection . nil)
     
     :preface
     (defun my/inhibit-server-message ()
