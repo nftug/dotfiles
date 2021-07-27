@@ -1118,7 +1118,7 @@
       (!if (string= (system-name) "mainpc")
 	  105
 	(!if (string= (system-name) "lapbook")
-	    100
+	    85
 	  (!if (string= (system-name) "gpd")
 	      100))))
     

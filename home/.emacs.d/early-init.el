@@ -43,7 +43,7 @@
   (!if (string= (system-name) "mainpc")
       "HackgenNerd Console-12"
     (!if (string= (system-name) "lapbook")
-	"HackgenNerd Console-10.5"
+	"HackgenNerd Console-9.5"
       (!if (string= (system-name) "gpd")
 	  "HackgenNerd Console-11"))))
 
