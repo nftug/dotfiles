@@ -65,7 +65,7 @@ stty eof '^D'
 #zstyle ':predict' verbose true
 
 function powerline_precmd() {
-    PS1="$(powerline-go -error $? -shell zsh -newline)"
+    PS1="$(powerline-go -error $? -modules cwd,git,root -cwd-mode dironly -shell zsh)"
 }
 
 function install_powerline_precmd() {
