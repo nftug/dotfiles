@@ -87,7 +87,7 @@
 				(,tramp-file-name-regexp . nil)))
     (text-scale-mode-step . 1.05)
     (inhibit-compacting-font-caches . t)
-    (pgtk-use-im-context-on-new-connection . nil)
+    ;; (pgtk-use-im-context-on-new-connection . nil)
     
     :preface
     (defun my/inhibit-server-message ()
@@ -330,7 +330,19 @@
 		  (apply func exitstatus `(,buffer))))
     :defvar aabc/result-buffer)
 
+  (leaf fcitx
+    :straight t
+    :bind
+    ("C-\\" . nil)
+    :custom
+    (fcitx-use-dbus . t)
+    :config
+    (fcitx-aggressive-setup)
+    :defun
+    fcitx-aggressive-setup)
+  
   (leaf mozc
+    :disabled t
     :straight (mozc :type built-in)
     :bind
     ("M-`"  . toggle-input-method)
@@ -347,6 +359,7 @@
     (mozc-cand-echo-area-stats-face . '((nil (:inherit minibuffer-prompt)))))
   
   (leaf mozc-posframe
+    :disabled t
     :if (and (or (window-system) (and (getenv "DISPLAY") (daemonp)))
      	     (not (string-match "^gpd.*" (system-name))))
     :straight (mozc-posframe :host github :repo "derui/mozc-posframe")
