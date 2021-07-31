@@ -338,8 +338,9 @@
     (fcitx-use-dbus . t)
     :config
     (fcitx-aggressive-setup)
+    (fcitx-aggressive-minibuffer-turn-off)
     :defun
-    fcitx-aggressive-setup)
+    fcitx-aggressive-setup fcitx--aggressive-minibuffer-turn-off)
   
   (leaf mozc
     :disabled t
