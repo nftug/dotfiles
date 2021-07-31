@@ -332,15 +332,15 @@
 
   (leaf fcitx
     :straight t
+    :require t
     :bind
     ("C-\\" . nil)
     :custom
     (fcitx-use-dbus . t)
     :config
     (fcitx-aggressive-setup)
-    (fcitx-aggressive-minibuffer-turn-off)
     :defun
-    fcitx-aggressive-setup fcitx--aggressive-minibuffer-turn-off)
+    fcitx-aggressive-setup)
   
   (leaf mozc
     :disabled t
