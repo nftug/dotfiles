@@ -1001,7 +1001,7 @@
     :require dash
     :custom
     (lsp-completion-provider . :capf)
-    (lsp-headerline-breadcrumb-mode . nil)
+    (lsp-headerline-breadcrumb-enable . nil)
     (lsp-prefer-flymake . nil))
 
   (leaf lsp-ui
