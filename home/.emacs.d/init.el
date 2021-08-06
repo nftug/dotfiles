@@ -87,7 +87,6 @@
 				(,tramp-file-name-regexp . nil)))
     (text-scale-mode-step . 1.05)
     (inhibit-compacting-font-caches . t)
-    (read-process-output-max . '(* 1024 1024))
     ;; (pgtk-use-im-context-on-new-connection . nil)
     
     :preface
@@ -96,6 +95,7 @@
       (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil))))
 
     :init
+    (setq read-process-output-max (* 1024 1024))
     (fset 'yes-or-no-p 'y-or-n-p)
     (set-language-environment "Japanese")
     (set-file-name-coding-system 'utf-8)
