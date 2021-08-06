@@ -87,6 +87,7 @@
 				(,tramp-file-name-regexp . nil)))
     (text-scale-mode-step . 1.05)
     (inhibit-compacting-font-caches . t)
+    (read-process-output-max . '(* 1024 1024))
     ;; (pgtk-use-im-context-on-new-connection . nil)
     
     :preface
@@ -1000,6 +1001,7 @@
     :require dash
     :custom
     (lsp-completion-provider . :capf)
+    (lsp-headerline-breadcrumb-mode . nil)
     (lsp-prefer-flymake . nil))
 
   (leaf lsp-ui
