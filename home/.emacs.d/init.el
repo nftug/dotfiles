@@ -1019,7 +1019,9 @@
     (python-mode-hook . lsp))
 
   (leaf flymake
-    :require t)
+    :require t
+    :hook
+    (prog-mode-hook . flymake-mode))
 
   (leaf web-mode
     :straight t
