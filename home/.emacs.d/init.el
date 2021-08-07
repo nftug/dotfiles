@@ -720,14 +720,16 @@
 	      (search-forward "(leaf " nil t))
 	(leaf-tree-mode)
 	(goto-char 1)))
-    
+
     ;; leaf-tree-modeをオンにしたときの挙動を変更。
     ;; (imenu-listを表示させずに有効化)
     (advice-add 'leaf-tree--setup :override
 		(lambda ()
 		  (setq leaf-tree--imenu-list-minor-mode-value (if imenu-list-minor-mode 1 -1))
 		  (pcase-dolist (`(,sym . ,fn) leaf-tree-advice-alist)
-		    (advice-add sym :around fn))))
+		    (advice-add sym :around fn))
+		  (imenu-list-update 'force)))
+
     :defvar leaf-tree-advice-alist leaf-tree--imenu-list-minor-mode-value imenu-list-minor-mode))
 
 
