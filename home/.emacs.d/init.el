@@ -1002,7 +1002,9 @@
     :custom
     (lsp-completion-provider . :capf)
     (lsp-headerline-breadcrumb-enable . nil)
-    (lsp-prefer-flymake . nil))
+    (lsp-prefer-flymake . 'flymake)
+    (lsp-document-sync-method . 2) ;; always send incremental document
+    (lsp-response-timeout . 5))
 
   (leaf lsp-ui
     :straight t
@@ -1015,18 +1017,9 @@
     :require t
     :hook
     (python-mode-hook . lsp))
-  
-  (leaf flycheck
-    :straight t
-    :init
-    (idle-require 'flycheck 3)
-    :custom
-    (flycheck-check-syntax-automatically . '(save mode-enabled))
-    (flycheck-idle-change-delay . 1)
-    (flycheck-emacs-lisp-load-path . 'inherit)
-    :defer-config
-    (global-flycheck-mode)
-    :defun global-flycheck-mode)
+
+  (leaf flymake
+    :require t)
 
   (leaf web-mode
     :straight t
