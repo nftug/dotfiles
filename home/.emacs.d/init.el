@@ -730,7 +730,16 @@
 		    (advice-add sym :around fn))
 		  (imenu-list-update 'force)))
 
-    :defvar leaf-tree-advice-alist leaf-tree--imenu-list-minor-mode-value imenu-list-minor-mode))
+    :defvar leaf-tree-advice-alist leaf-tree--imenu-list-minor-mode-value imenu-list-minor-mode)
+
+  (leaf projectile
+    :straight t
+    :custom
+    (projectile-completion-system . 'ivy)
+    :bind
+    (:projectile-mode-map ("C-c p" . projectile-command-map))
+    :config
+    (projectile-global-mode)))
 
 
 
@@ -969,7 +978,13 @@
     :defun
     (migemo-init migemo-get-pattern ivy--trim-trailing-re ivy--split ivy--regex-plus)
     (my/migemo-get-pattern-shyly my/ivy--regex-migemo-pattern my/ivy--regex-migemo my/ivy--regex-migemo-plus my/ivy-migemo-add-rebuilders)
-    :defvar ivy--subexps))
+    :defvar ivy--subexps)
+
+  (leaf counsel-projectile
+    :straight t
+    :custom
+    (counsel-projectile-sort-files . t)
+    (counsel-projectile-sort-projects . t)))
 
 
 
