@@ -632,7 +632,7 @@
     :straight t
     :after which-key
     :custom
-    (which-key-posframe-font . "HackgenNerd Console-10.5")
+    (which-key-posframe-font . nil)
     :config
     (which-key-posframe-mode)
     :defun which-key-posframe-mode)
