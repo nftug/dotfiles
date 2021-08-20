@@ -117,6 +117,7 @@ alias ec='ecl.sh'
 # alias top='htop'
 alias t='tmux'
 #alias neofetch='neofetch --w3m --source=~/Pictures --package_managers off'
+alias heroku='TERM=xterm heroku'
 
 function picscale() {
     for f in $(find .  -maxdepth 1 -type f -name '*.JPG'); do
