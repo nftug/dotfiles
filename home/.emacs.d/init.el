@@ -982,6 +982,8 @@
 
   (leaf counsel-projectile
     :straight t
+    :bind
+    ("C-x p" . counsel-projectile)
     :custom
     (counsel-projectile-sort-files . t)
     (counsel-projectile-sort-projects . t)))
