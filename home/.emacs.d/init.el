@@ -1034,14 +1034,19 @@
     :straight t
     :after python
     :require t
+    :init
+    (defun lsp-pyright/python-mode-hook ()
+      (lsp)
+      (when (fboundp 'flycheck-mode)
+        (setq flycheck-disabled-checkers '(python-mypy))))
     :hook
-    (python-mode-hook . lsp))
+    (python-mode-hook . lsp-pyright/python-mode-hook))
 
-  (leaf flymake
-    :require t
-    :hook
-    (prog-mode-hook . flymake-mode))
-
+  (leaf flycheck
+    :straight t
+    :config
+    (global-flycheck-mode))
+  
   (leaf web-mode
     :straight t
     :mode
@@ -1056,7 +1061,9 @@
     (web-mode-enable-auto-pairing . nil)
     (web-mode-enable-auto-closing . t)
     (web-mode-engines-alist
-     . '(("django" . "\\.html\\'"))))
+     . '(("django" . "\\.html\\'")))
+    :config
+    (flycheck-add-mode 'javascript-eslint 'web-mode))
   )
 
 
