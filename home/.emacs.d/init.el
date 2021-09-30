@@ -1061,9 +1061,7 @@
     (web-mode-enable-auto-pairing . nil)
     (web-mode-enable-auto-closing . t)
     (web-mode-engines-alist
-     . '(("django" . "\\.html\\'")))
-    :config
-    (flycheck-add-mode 'javascript-eslint 'web-mode))
+     . '(("django" . "\\.html\\'"))))
   )
 
 
