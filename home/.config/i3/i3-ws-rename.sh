@@ -9,7 +9,7 @@ declare -A icon=(
     ['Leafpad']='' ['Viewnior']='' ['Xarchiver']='' ['mpv']='蘆'
     ['Evince']='' ['zoom']='' ['Easytag']='炙' ['Steam']='戮'
     ['Enpass']='' ['Pamac-manager']='' ['Mpdevil']=''
-    ['firefox']='' ['Slack']='聆'
+    ['firefox']='' ['Slack']='聆' ['code-oss']=''
     
     ['_EMPTY_']='ﱤ'
     ['_OTHER_']='ﬓ'
@@ -41,8 +41,8 @@ function rename_ws {
     ws_name_new="${ws_name_num}:${icons}"
 
     if [[ "${ws_name}" != "${ws_name_new}" ]]; then
-	i3-msg "rename workspace \"${ws_name}\" to \"${ws_name_new}\"" >/dev/null 2>/dev/null
-	# echo "R: rename workspace \"${ws_name}\" to \"${ws_name_new}\"" >&2
+		i3-msg "rename workspace \"${ws_name}\" to \"${ws_name_new}\"" >/dev/null 2>/dev/null
+		# echo "R: rename workspace \"${ws_name}\" to \"${ws_name_new}\"" >&2
     fi
 
     echo ${flag_empty}
