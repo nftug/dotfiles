@@ -1061,7 +1061,13 @@
     (web-mode-enable-auto-pairing . nil)
     (web-mode-enable-auto-closing . t)
     (web-mode-engines-alist
-     . '(("django" . "\\.html\\'"))))
+     . '(("django" . "\\.html\\'")))
+    :config
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
+    :hook
+    (web-mode-hook . (lambda ()
+		       (setq tab-width 2)
+		       (setq indent-tabs-mode nil))))
   )
 
 
