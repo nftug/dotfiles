@@ -19,6 +19,10 @@ else
     case $progname in
 	"chromium"|"nautilus"|"gedit"|"thunar"|"firefox" )
 	    xdotool key ctrl+w ;;
+	"code" )
+	    xdotool key ctrl+x
+	    xdotool key k
+	    ;;
 	gimp-* )
             winname=`xdotool getwindowname $activewin`
 	    if [ -n "$(echo $winname|grep 'GIMP$')" ]; then
