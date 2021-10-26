@@ -242,7 +242,7 @@ click-right=~/bin/turbo-switch.sh
 
 [module/mem]
 type = custom/script
-hidden = true
+hidden = false
 tail = true
 exec =  ~/.config/polybar/scripts/cpu_mem.sh mem
 format-padding = 1
