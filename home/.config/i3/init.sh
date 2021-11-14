@@ -39,7 +39,8 @@ else
     #eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     #export SSH_AUTH_SOCK
 
-    ~/bin/ecl.sh -nc &
+    # ~/bin/ecl.sh -nc &
+    emacs --daemon &
 
     fcitx-autostart &
     nitrogen --restore &
