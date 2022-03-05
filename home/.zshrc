@@ -151,17 +151,17 @@ autoload -Uz _zinit
 zinit ice wait'0'
 
 zinit light-mode for \
-      zinit-zsh/z-a-rust \
-      zinit-zsh/z-a-as-monitor \
-      zinit-zsh/z-a-patch-dl \
-      zinit-zsh/z-a-bin-gem-node
+      zdharma-continuum/z-a-rust \
+      zdharma-continuum/z-a-as-monitor \
+      zdharma-continuum/z-a-patch-dl \
+      zdharma-continuum/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
 
 zinit ice wait'0'
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
-      zdharma/fast-syntax-highlighting \
+      zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
