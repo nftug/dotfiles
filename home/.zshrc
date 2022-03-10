@@ -98,7 +98,7 @@ setopt PROMPT_SUBST
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
 
-export BROWSER=/usr/bin/chromium
+export BROWSER=/usr/bin/firefox
 export EDITOR="$HOME/bin/ecl.sh"
 # if [ $TERM != linux ]; then
 #     export EDITOR='$HOME/bin/ecl.sh'
