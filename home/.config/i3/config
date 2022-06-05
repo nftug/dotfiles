@@ -116,7 +116,7 @@ bindsym Control+Print exec --no-startup-id ~/bin/maim_wrapper.sh -s
 
 bindsym F1 exec --no-startup-id ~/.config/i3/termite-scratch.sh
 bindcode mode_switch+10 exec --no-startup-id ~/.config/i3/termite-scratch.sh
-bindsym F3 exec --no-startup-id ~/.config/i3/stalonetray-scratch.sh
+bindsym F6 exec --no-startup-id ~/.config/i3/stalonetray-scratch.sh
 bindcode mode_switch+12 exec --no-startup-id ~/.config/i3/stalonetray-scratch.sh
 bindsym F4 exec --no-startup-id ~/bin/emacs-sdcv.sh
 bindcode mode_switch+13 exec --no-startup-id ~/bin/emacs-sdcv.sh
