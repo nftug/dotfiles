@@ -332,6 +332,7 @@
     :defvar aabc/result-buffer)
 
   (leaf fcitx
+    :disabled t
     :straight t
     :require t
     :bind
@@ -344,7 +345,6 @@
     fcitx-aggressive-setup)
   
   (leaf mozc
-    :disabled t
     :straight (mozc :type built-in)
     :bind
     ("M-`"  . toggle-input-method)
@@ -361,7 +361,6 @@
     (mozc-cand-echo-area-stats-face . '((nil (:inherit minibuffer-prompt)))))
   
   (leaf mozc-posframe
-    :disabled t
     :if (and (or (window-system) (and (getenv "DISPLAY") (daemonp)))
      	     (not (string-match "^gpd.*" (system-name))))
     :straight (mozc-posframe :host github :repo "derui/mozc-posframe")
