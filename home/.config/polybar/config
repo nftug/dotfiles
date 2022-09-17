@@ -31,10 +31,10 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = HackgenNerdConsole:size=11.5;4
-font-1 = HackgenNerdConsole:size=11.5;3
-font-2 = HackgenNerdConsole:size=13.5;3
-font-3 = HackgenNerdConsole:size=8;5
+font-0 = HackGen Console NF:size=11.5;4
+font-1 = HackGen Console NF:size=11.5;3
+font-2 = HackGen Console NF:size=13.5;3
+font-3 = HackGen Cosole NF:size=8;5
 
 modules-left = dmenu i3 i3-new-ws
 modules-center = 
@@ -71,10 +71,10 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = HackgenNerdConsole:size=19;5
-font-1 = HackgenNerdConsole:size=19;4
-font-2 = HackgenNerdConsole:size=19;4
-font-3 = HackgenNerdConsole:size=13;6
+font-0 = HackGen Console NF:size=19;5
+font-1 = HackGen Console NF:size=19;4
+font-2 = HackGen Console NF:size=19;4
+font-3 = HackGen Console NF:size=13;6
 
 
 modules-left = dmenu i3 i3-new-ws
@@ -112,10 +112,10 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = HackgenNerdConsole:size=13;4
-font-1 = HackgenNerdConsole:size=13;3
-font-2 = HackgenNerdConsole:size=14;4
-font-3 = HackgenNerdConsole:size=8;6
+font-0 = HackGen Console NF:size=13;4
+font-1 = HackGen Console NF:size=13;3
+font-2 = HackGen Console NF:size=14;4
+font-3 = HackGen Console NF:size=8;6
 
 modules-left = dmenu i3 i3-new-ws
 modules-center = 

@@ -41,11 +41,11 @@
 
 (defconst default-font
   (!if (string= (system-name) "mainpc")
-      "HackgenNerd Console-11"
+      "Hackgen Console NF-11.5"
     (!if (string= (system-name) "lapbook")
-	"HackgenNerd Console-9"
+	"Hackgen Console NF-10"
       (!if (string= (system-name) "gpd")
-	  "HackgenNerd Console-11"))))
+	  "Hackgen Console NF-11"))))
 
 (setq initial-frame-alist
       (append `((width . 100)
