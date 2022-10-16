@@ -110,4 +110,5 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "/usr/share/rofi/themes/Adapta-Nokto.rasi"
+//@theme "/usr/share/rofi/themes/Adapta-Nokto.rasi"
+@theme "/usr/share/rofi/themes/android_notification.rasi"
