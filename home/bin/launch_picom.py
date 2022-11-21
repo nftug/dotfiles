@@ -26,7 +26,7 @@ if os.path.exists(conf_path):
     MyProcess('picom', exact=True).kill(wait=True)
 
     subprocess.run(
-        ['picom', '--experimental-backends', '-b',
+        ['picom', '-b',
          '--shadow-exclude-reg', 'x' + str(bar_height) + '+0+0'])
 
 else:
