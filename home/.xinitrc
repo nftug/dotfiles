@@ -38,5 +38,5 @@ fi
 [ -f ~/.xprofile ] && source ~/.xprofile
 [ -f /etc/xprofile ] && source /etc/xprofile
 
-[ `which gnome-session`] && exec gnome-session
+[ `which gnome-session` ] && exec gnome-session
 [ `which i3` ] && exec i3
