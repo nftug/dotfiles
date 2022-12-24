@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Emacs Daemon
+Exec=/usr/bin/emacs --daemon
+Icon=emacs
+Comment=
+X-GNOME-Autostart-enabled=true
+StartupNotify=false
