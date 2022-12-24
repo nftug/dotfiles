@@ -39,11 +39,18 @@
 
 (setq initial-scratch-message nil)
 
-(defconst default-font  "Hackgen Console NF-11.5")
+(defconst default-font
+  (!if (string= (system-name) "MacBook-Air.local")
+      "HackGen Console NF-13"
+    (!if (string= (system-name) "lapbook")
+	"HackGen Console NF-10"
+      (!if (string= (system-name) "gpd")
+	  "HackGen Console NF-11"
+	"HackGen Console NF-11.5"))))
 
 (setq initial-frame-alist
-      (append `((width . 100)
-                (height . 30)
+      (append `((width . 140)
+                (height . 45)
 		(vertical-scroll-bars . nil)
 		(font . ,default-font)
 		;; (alpha . (1.0 0.7))
