@@ -39,13 +39,7 @@
 
 (setq initial-scratch-message nil)
 
-(defconst default-font
-  (!if (string= (system-name) "mainpc")
-      "Hackgen Console NF-11.5"
-    (!if (string= (system-name) "lapbook")
-	"Hackgen Console NF-10"
-      (!if (string= (system-name) "gpd")
-	  "Hackgen Console NF-11"))))
+(defconst default-font  "Hackgen Console NF-11.5")
 
 (setq initial-frame-alist
       (append `((width . 100)

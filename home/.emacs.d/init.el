@@ -173,32 +173,47 @@
 		     (repeat :tag "List of faces" face)
 		     (plist :tag "Face property list"))
       :group :my/fontset)
+    
+     (eval-and-compile
+       (defconst asciifont-sans
+	 (!if (eq system-type 'darwin)
+	     "Helvetica"
+	   "Source Han Sans JP-11.5:weight=light:slant=normal"))
+       (defconst jpfont-sans
+	 (!if (eq system-type 'darwin)
+	     "ヒラギノ角ゴ ProN"
+	   "Source Han Sans JP"))
+       (defconst asciifont-serif
+	 (!if (eq system-type 'darwin)
+	     "Times New Roman"
+	   "Source Serif Pro-11.5:weight=normal:slant=normal"))
+       (defconst jpfont-serif
+	 (!if (eq system-type 'darwin)
+	     "ヒラギノ明朝 ProN"
+	   "Source Han Serif JP")))
+    
     :config
     (defun my/fonts-init ()
       (when window-system
 	(unless (fontset-name-p "fontset-variable")
-	  (let* ((asciifont "Source Han Sans JP-11.5:weight=light:slant=normal")
-		 (jpfont "Source Han Sans JP")
-		 (fontset)
+	  (let* ((fontset)
 		 (fontspec)
 		 (jp-fontspec))
-	    (setq fontset (create-fontset-from-ascii-font asciifont nil "variable"))
-	    (setq fontspec (font-spec :family asciifont))
-	    (setq jp-fontspec (font-spec :family jpfont))
+	    (setq fontset (create-fontset-from-ascii-font asciifont-sans nil "variable"))
+	    (setq fontspec (font-spec :family asciifont-sans))
+	    (setq jp-fontspec (font-spec :family jpfont-sans))
 	    (set-fontset-font fontset 'unicode jp-fontspec nil 'append)
 	    (set-fontset-font fontset 'ascii fontspec nil 'append) ;;対処済み
 	    ;;(set-face-attribute 'my/serif nil :font fontset) ;;英語のみ
 	    (set-face-attribute 'variable-pitch nil :fontset fontset)))
 	
 	(unless (fontset-name-p "fontset-myserif")
-	  (let* ((asciifont "Source Serif Pro-11.5:weight=normal:slant=normal")
-		 (jpfont "Source Han Serif JP")
-		 (fontset)
+	  (let* ((fontset)
 		 (fontspec)
 		 (jp-fontspec))
-	    (setq fontset (create-fontset-from-ascii-font asciifont nil "myserif"))
-	    (setq fontspec (font-spec :family asciifont))
-	    (setq jp-fontspec (font-spec :family jpfont))
+	    (setq fontset (create-fontset-from-ascii-font asciifont-serif nil "myserif"))
+	    (setq fontspec (font-spec :family asciifont-serif))
+	    (setq jp-fontspec (font-spec :family jpfont-serif))
 	    (set-fontset-font fontset 'unicode jp-fontspec nil 'append)
 	    (set-fontset-font fontset 'ascii fontspec nil 'append) ;;対処済み
 	    ;;(set-face-attribute 'my/serif nil :font fontset) ;;英語のみ
@@ -345,6 +360,8 @@
     fcitx-aggressive-setup)
   
   (leaf mozc
+    ;; :if (getenv "XDG_SESSION_DESKTOP")
+    :disabled t
     :straight (mozc :type built-in)
     :bind
     ("M-`"  . toggle-input-method)
@@ -361,6 +378,7 @@
     (mozc-cand-echo-area-stats-face . '((nil (:inherit minibuffer-prompt)))))
   
   (leaf mozc-posframe
+    :disabled t
     :if (and (or (window-system) (and (getenv "DISPLAY") (daemonp)))
      	     (not (string-match "^gpd.*" (system-name))))
     :straight (mozc-posframe :host github :repo "derui/mozc-posframe")
@@ -535,6 +553,7 @@
     :blackout t)
 
   (leaf undohist
+    :disabled t
     :straight t
     :hook
     (after-init-hook . undohist-initialize)
@@ -916,7 +935,6 @@
     (migemo-user-dictionary . nil)
     (migemo-regex-dictionary . nil)
     (migemo-coding-system . 'utf-8-unix)
-    
     :preface
     (!! (defconst my/ivy-migemo-target-alist
 	  '(swiper counsel-find-file counsel-imenu counsel-sdcv-prompt)))
@@ -973,7 +991,7 @@
     (migemo-init)
 
     (my/ivy-migemo-add-rebuilders)
-
+    
     :defun
     (migemo-init migemo-get-pattern ivy--trim-trailing-re ivy--split ivy--regex-plus)
     (my/migemo-get-pattern-shyly my/ivy--regex-migemo-pattern my/ivy--regex-migemo my/ivy--regex-migemo-plus my/ivy-migemo-add-rebuilders)
@@ -1157,13 +1175,13 @@
     :defvar centaur-tabs-bar-height centaur-tabs-active-bar
     :preface
     (defconst centaur-tabs-font-size
-      (!if (string= (system-name) "mainpc")
-	  105
+      (!if (string= (system-name) "MacBook-Air.local")
+	  125
 	(!if (string= (system-name) "lapbook")
 	    85
 	  (!if (string= (system-name) "gpd")
-	      100))))
-    
+	      100
+	    105))))
     :init
     (if (daemonp)
 	(add-hook 'server-after-make-frame-hook 'centaur-tabs-mode)
@@ -1199,9 +1217,9 @@
 					2
 					centaur-tabs-bar-height))
 	  (centaur-tabs-mode 1)
-	  (centaur-tabs-change-fonts "HackgenNerd Console" centaur-tabs-font-size))))
+	  (centaur-tabs-change-fonts "HackGen Console NF" centaur-tabs-font-size))))
     
-    (centaur-tabs-change-fonts "HackgenNerd Console" centaur-tabs-font-size)
+    (centaur-tabs-change-fonts "HackGen Console NF" centaur-tabs-font-size)
     (advice-add 'centaur-tabs-hide-tab :around
 		(lambda (oldfn buf &rest args)
 		  (if (with-current-buffer buf
@@ -1252,6 +1270,7 @@
 (leaf *language
   :config
   (leaf sdcv
+    :if (executable-find "sdcv")
     :straight (sdcv :repo "manateelazycat/sdcv")
     :commands sdcv-popup counsel-sdcv sdcv-search-input
     :bind
@@ -1269,7 +1288,8 @@
 	  (!if (string= (system-name) "lapbook")
 	      1.0
 	    (!if (string= (system-name) "gpd")
-		1.1)))))
+		1.1
+	      1.05)))))
 
     (defvar sdcv-history)
     (defun sdcv-make-history ()
@@ -1499,7 +1519,7 @@
 
       (when window-system
 	(variable-pitch-mode 1)
-	(setq line-spacing 1)
+	(setq line-spacing 2)
 	(face-remap-add-relative 'org-document-title :height 140)
 	(dotimes (i 8)
 	  (face-remap-add-relative (intern (format "org-level-%s" (1+ i)))
@@ -1668,6 +1688,7 @@
       (load (! (expand-file-name "my-org-latex-classes" user-emacs-directory)))))
   
   (leaf org-noter
+    :disabled t
     :after org
     :straight t
     :defun org-noter--doc-location-change-handler
@@ -1691,6 +1712,7 @@
 		(lambda (&rest _) (org-noter--doc-location-change-handler))))
 
   (leaf org-pomodoro
+    :disabled t
     :straight t
     :after org
     :require notifications
@@ -1797,6 +1819,7 @@
 			    (add-hook 'kill-buffer-hook 'pdf-view-restore-save nil t))))
   
   (leaf nov
+    :disabled t
     :straight t
     :mode
     ("\\.epub\\'" . nov-mode)
